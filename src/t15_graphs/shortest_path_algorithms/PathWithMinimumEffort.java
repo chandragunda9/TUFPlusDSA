@@ -45,4 +45,11 @@ public class PathWithMinimumEffort {
         }
         return minEffort[rows - 1][columns - 1];
     }
+
+    public int MinimumEffort(List<List<Integer>> heights) {
+        int rows = heights.size();
+        int cols = heights.get(0).size();
+        int[][] arr = heights.stream().map(l -> l.stream().mapToInt(Integer::intValue).toArray()).toArray(int[][]::new);
+        return MinimumEffort(rows, cols, arr);
+    }
 }

@@ -2,7 +2,6 @@ package t15_graphs.shortest_path_algorithms;
 
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class ShortestPathInABinaryMaze {
@@ -16,7 +15,7 @@ public class ShortestPathInABinaryMaze {
         }
     }
 
-    int shortestPath(int[][] grid, int[] source, int[] destination) {
+    static int shortestPath(int[][] grid, int[] source, int[] destination) {
         int n = grid.length, m = grid[0].length;
         if (grid[source[0]][source[1]] == 0)
             return -1;
@@ -44,5 +43,12 @@ public class ShortestPathInABinaryMaze {
             }
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+        int[][] grid = {{1, 1, 1, 1}, {1, 1, 0, 1}, {1, 1, 1, 1}, {1, 1, 0, 0}, {1, 0, 0, 1}};
+        int[] source = {0, 1};
+        int[] dst = {0, 1};
+        System.out.println(shortestPath(grid, source, dst));
     }
 }
