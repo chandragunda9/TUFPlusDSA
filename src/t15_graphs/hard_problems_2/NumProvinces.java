@@ -1,4 +1,6 @@
-package t15_graphs.mst;
+package t15_graphs.hard_problems_2;
+
+import t15_graphs.mst.DisjointSet;
 
 public class NumProvinces {
     public int numProvinces(int[][] adj, int V) {
