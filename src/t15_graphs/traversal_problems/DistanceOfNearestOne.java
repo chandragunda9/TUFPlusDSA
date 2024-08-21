@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class DistanceOfNearestOne {
     public static void main(String[] args) {
-        int[][] grid = {{1, 1}, {1, 1}};
+        int[][] grid = {{0, 0}, {0, 0}};
         System.out.println(Arrays.deepToString(nearest(grid)));
     }
 
@@ -58,6 +58,15 @@ public class DistanceOfNearestOne {
     public static int[][] nearest(int[][] grid) {
         Queue<Cell> q = new LinkedList<>();
         int n = grid.length, m = grid[0].length;
+        boolean anyOnes = false;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 1)
+                    anyOnes = true;
+            }
+        }
+        if (!anyOnes)
+            return grid;
         int[][] minDist = new int[n][m];
         for (int i = 0; i < n; i++) {
             Arrays.fill(minDist[i], Integer.MAX_VALUE);
