@@ -1,4 +1,4 @@
-package t3_arrays.easy;
+package t3_arrays.fundamentals;
 
 public class LinearSearch {
     public int linearSearch(int nums[], int target) {
