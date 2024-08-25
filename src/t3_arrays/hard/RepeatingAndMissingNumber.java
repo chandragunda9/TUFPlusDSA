@@ -9,22 +9,27 @@ public class RepeatingAndMissingNumber {
         for (int i = 1; i <= n; i++) {
             xor ^= i;
         }
-        int bitNo = 0;
-        while (true) {
-            if ((xor & (1 << bitNo)) != 0)
-                break;
-            bitNo++;
-        }
+//        int bitNo = 0;
+//        while (true) {
+//            if ((xor & (1 << bitNo)) != 0)
+//                break;
+//            bitNo++;
+//        }
+
+//        int number = xor & ~(xor - 1);
+        int number = xor & -xor;
         int ones = 0, zero = 0;
         for (int i = 0; i < n; i++) {
-            if ((nums[i] & (1 << bitNo)) != 0) {
+//            if ((nums[i] & (1 << bitNo)) != 0) {
+            if ((nums[i] & number) != 0) {
                 ones ^= nums[i];
             } else {
                 zero ^= nums[i];
             }
         }
         for (int i = 1; i <= n; i++) {
-            if ((i & (1 << bitNo)) != 0) {
+//            if ((i & (1 << bitNo)) != 0) {
+            if ((i & number) != 0) {
                 ones ^= i;
             } else {
                 zero ^= i;
@@ -36,9 +41,5 @@ public class RepeatingAndMissingNumber {
                 count++;
         }
         return count >= 2 ? new int[]{zero, ones} : new int[]{ones, zero};
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {3, 5, 4, 1, 1};
     }
 }
