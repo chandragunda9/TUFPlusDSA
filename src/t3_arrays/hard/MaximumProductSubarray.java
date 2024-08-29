@@ -15,4 +15,26 @@ public class MaximumProductSubarray {
         }
         return max;
     }
+
+    public int method1(int[] nums) {
+        int prod1 = nums[0], prod2 = nums[0], res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int temp = Math.max(nums[i], Math.max(prod1 * nums[i], prod2 * nums[i]));
+            prod2 = Math.min(nums[i], Math.max(prod1 * nums[i], prod2 * nums[i]));
+            prod1 = temp;
+            res = Math.max(res, prod1);
+        }
+        return res;
+    }
+
+    long maxProduct(int[] nums, int n) {
+        long prod1 = nums[0], prod2 = nums[0], res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            long temp = Math.max(nums[i], Math.max(prod1 * nums[i], prod2 * nums[i]));
+            prod2 = Math.min(nums[i], Math.max(prod1 * nums[i], prod2 * nums[i]));
+            prod1 = temp;
+            res = Math.max(res, prod1);
+        }
+        return res;
+    }
 }

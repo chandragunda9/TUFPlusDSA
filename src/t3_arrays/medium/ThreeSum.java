@@ -56,4 +56,21 @@ public class ThreeSum {
         List<List<Integer>> ans = obj.method2(arr);
         System.out.println(ans);
     }
+
+    public static boolean find3Numbers(int arr[], int n, int x) {
+        Arrays.sort(arr);
+        for (int k = n - 1; k >= 2; k--) {
+            int l = 0, r = k - 1;
+            while (l < r) {
+                if (arr[l] + arr[r] + arr[k] == x)
+                    return true;
+                else if (arr[l] + arr[r] + arr[k] > x) {
+                    r--;
+                } else {
+                    l++;
+                }
+            }
+        }
+        return false;
+    }
 }
