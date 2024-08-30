@@ -47,4 +47,47 @@ public class MatrixMedian {
         MatrixMedian obj = new MatrixMedian();
         System.out.println(obj.findMedian(mat));
     }
+
+    int median(int matrix[][], int R, int C) {
+        //all rows are sorted
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < R; i++) {
+            min = Math.min(min, matrix[i][0]);
+            max = Math.max(max, matrix[i][1]);
+        }
+        //need to find out howManyElements<=mid greater than R*C/2
+        int low = min, high = max;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int count = f(matrix, mid);
+            if (count > R * C / 2) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+
+    int fun(int[][] mat, int mid) {
+        int count = 0;
+        for (int i = 0; i < mat.length; i++) {
+            count += getUpperBound(mat[i], mid);
+        }
+        return count;
+    }
+
+    int getUpperBound(int[] arr, int x) {
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (arr[mid] > x) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
 }

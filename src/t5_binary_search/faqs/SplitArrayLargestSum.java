@@ -34,4 +34,38 @@ public class SplitArrayLargestSum {
         }
         return low;
     }
+
+    static int f(int[] arr, int mid) {
+        int sum = 0, count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (sum + arr[i] <= mid) {
+                sum += arr[i];
+            } else {
+                sum = arr[i];
+                count++;
+            }
+        }
+        count++;
+        return count;
+    }
+
+    static int splitArray(int[] arr, int N, int K) {
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < N; i++) {
+            max = Math.max(max, arr[i]);
+            sum += arr[i];
+        }
+        int low = max, high = sum;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int count = f(arr, mid);
+            if (count <= K) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
 }

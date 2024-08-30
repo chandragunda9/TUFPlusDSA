@@ -15,4 +15,18 @@ public class SearchInA2DMatrixII {
         }
         return false;
     }
+
+    public static int matSearch(int[][] mat, int N, int M, int X) {
+        int row = 0, col = M - 1;
+        while (row < N && col >= 0) {
+            if (mat[row][col] == X)
+                return 1;
+            if (X < mat[row][col]) {
+                col--;
+            } else {
+                row++;
+            }
+        }
+        return 0;
+    }
 }
