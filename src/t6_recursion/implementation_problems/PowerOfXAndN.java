@@ -58,9 +58,10 @@ public class PowerOfXAndN {
     }
 
     public static void main(String[] args) {
-        int n = Integer.MIN_VALUE;
+//        int n = Integer.MIN_VALUE;
+        int n = 2;
         System.out.println(n);
-        double x = 2.000;
+        double x = 2.5000;
         System.out.println(myPow(x, n));
     }
 }
