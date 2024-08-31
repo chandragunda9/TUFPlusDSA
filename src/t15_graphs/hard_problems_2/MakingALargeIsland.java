@@ -77,7 +77,7 @@ public class MakingALargeIsland {
 
     public static void main(String[] args) {
         MakingALargeIsland ob = new MakingALargeIsland();
-        int[][] grid = {{1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 0, 0}};
+        int[][] grid = {{1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 0}};
         System.out.println(ob.largestIsland(grid));
     }
 }
