@@ -13,4 +13,11 @@ public class UpperBound {
         }
         return low;
     }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 6, 7, 8, 19, 23};
+        int x = 23;
+        UpperBound obj = new UpperBound();
+        System.out.println(obj.upperBound(nums, x));
+    }
 }
