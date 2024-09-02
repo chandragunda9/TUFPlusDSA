@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unchecked")
 public class BipartiteGraph {
     public static void main(String[] args) {
-        int[][] arr = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
+//        int[][] arr = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
+        int[][] arr = {{1, 2, 3}, {2, 0}, {3, 0, 1}, {0, 2}};
         List<Integer>[] li = Arrays.stream(arr).map(a -> Arrays.stream(a).boxed().
                 collect(Collectors.toList())).toArray(List[]::new);
         System.out.println(isBipartite(4, li));
@@ -30,7 +31,7 @@ public class BipartiteGraph {
         colorsFilled[v] = color;
         List<Integer> conn = adj[v];
         for (int ele : conn) {
-            if (colorsFilled[ele] != -1) {
+            if (colorsFilled[ele] == -1) {
                 if (!dfs(ele, 1 - color, colorsFilled, adj)) {
                     return false;
                 }
