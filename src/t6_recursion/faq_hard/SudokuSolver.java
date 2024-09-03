@@ -53,6 +53,7 @@ public class SudokuSolver {
                 {1, 3, 0, 0, 0, 0, 2, 5, 0},
                 {0, 0, 0, 0, 0, 0, 0, 7, 4},
                 {0, 0, 5, 2, 0, 6, 3, 0, 0}};
+        System.out.println(Arrays.deepToString(sudoku));
         obj.solveSudoku(sudoku);
         System.out.println(Arrays.deepToString(sudoku));
     }
@@ -61,36 +62,34 @@ public class SudokuSolver {
         solveTheSudoku(sudoku);
     }
 
-    boolean solveTheSudoku(int[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if (board[i][j] == 0) {
-                    for (int digit = 1; digit <= 9; digit++) {
-                        if (isAllConditionsMet(board, i, j, digit)) {
-                            board[i][j] = digit;
-                            if (solveTheSudoku(board)) return true;
-                            board[i][j] = 0;
-                        }
-                    }
+    boolean isAllConditionsMet(int row, int col, int[][] sudoku, int digit) {
+        for (int i = 0; i < 9; i++) {
+            if (sudoku[row][i] == digit || sudoku[i][col] == digit)
+                return false;
+        }
+        int baseRow = row / 3 * 3, baseCol = col / 3 * 3;
+        for (int i = baseRow; i < baseRow + 3; i++) {
+            for (int j = baseCol; j < baseCol + 3; j++) {
+                if (sudoku[i][j] == digit)
                     return false;
-                }
             }
         }
         return true;
     }
 
-    static boolean isAllConditionsMet(int[][] grid, int row, int col, int digit) {
-        for (int i = 0; i < 9; i++) {
-            if (grid[row][i] == digit || grid[i][col] == digit)
-                return false;
-        }
-
-        int startRow = row / 3 * 3;
-        int startCol = col / 3 * 3;
-        for (int i = startRow; i < startRow + 3; i++) {
-            for (int j = startCol; j < startCol + 3; j++) {
-                if (grid[i][j] == digit)
+    boolean solveTheSudoku(int[][] sudoku) {
+        for (int row = 0; row < sudoku.length; row++) {
+            for (int col = 0; col < sudoku[0].length; col++) {
+                if (sudoku[row][col] == 0) {
+                    for (int i = 1; i <= 9; i++) {
+                        if (isAllConditionsMet(row, col, sudoku, i)) {
+                            sudoku[row][col] = i;
+                            if (solveTheSudoku(sudoku)) return true;
+                            sudoku[row][col] = 0;
+                        }
+                    }
                     return false;
+                }
             }
         }
         return true;
