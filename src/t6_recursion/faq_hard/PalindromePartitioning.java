@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PalindromePartitioning {
-    public static void main(String[] args) {
-        PalindromePartitioning obj = new PalindromePartitioning();
-        String s = "ab";
-        System.out.println(obj.partition(s));
-    }
 
     public List<List<String>> partition(String s) {
         List<List<String>> ans = new ArrayList<>();
@@ -39,5 +34,41 @@ public class PalindromePartitioning {
                 return false;
         }
         return true;
+    }
+
+    static int palindromicPartition(String str) {
+        int[] ans = new int[1];
+        ans[0] = Integer.MAX_VALUE;
+        findPartitions(0, str, 0, ans);
+        return ans[0];
+    }
+
+    static void findPartitions(int start, String str, int count, int[] ans) {
+        if (start == str.length()) {
+            ans[0] = Math.min(ans[0], count - 1);
+            return;
+        }
+        for (int i = start; i < str.length(); i++) {
+            boolean isPalindrome = f(str.substring(start, i + 1));
+            if (isPalindrome) {
+                findPartitions(i + 1, str, count + 1, ans);
+            }
+        }
+    }
+
+    static boolean f(String st) {
+        int i = 0, j = st.length() - 1;
+        while (i < j) {
+            if (st.charAt(i++) != st.charAt(j--))
+                return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        PalindromePartitioning obj = new PalindromePartitioning();
+        String s = "ababbbabbababa";
+        System.out.println(obj.partition(s));
+        System.out.println(palindromicPartition(s));
     }
 }
