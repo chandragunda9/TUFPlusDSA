@@ -4,6 +4,7 @@ class ListNode {
     int val;
     ListNode next;
     ListNode child;
+    ListNode random;
 
     ListNode() {
         val = 0;
@@ -15,6 +16,7 @@ class ListNode {
         val = data1;
         next = null;
         child = null;
+        random = null;
     }
 
     ListNode(int data1, ListNode next1, ListNode next2) {
