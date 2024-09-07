@@ -1,24 +1,27 @@
-package t6_recursion.medium;
+package GFGProblems.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SubsetsI {
-    public List<Integer> subsetSums(int[] nums) {
-        List<Integer> ans = new ArrayList<>();
-        findAllSubsets(0, nums, 0, ans);
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        generate(0, 0, arr, ans);
         return ans;
     }
 
-    void findAllSubsets(int ind, int[] nums, int currSum, List<Integer> ans) {
-        if (ind == nums.length) {
+    void generate(int ind, int currSum,
+                  ArrayList<Integer> nums, ArrayList<Integer> ans) {
+        if (ind == nums.size()) {
             ans.add(currSum);
             return;
         }
         //take case
-        findAllSubsets(ind + 1, nums, currSum + nums[ind], ans);
+        generate(ind + 1, currSum + nums.get(ind), nums, ans);
         //not take case
-        findAllSubsets(ind + 1, nums, currSum, ans);
+        generate(ind + 1, currSum, nums, ans);
     }
 
     public List<Integer> method1(int[] nums) {
@@ -36,9 +39,10 @@ public class SubsetsI {
     }
 
     public static void main(String[] args) {
-        int[] nums = {5, 2, 1};
+        int[] arr = {2, 3};
+        ArrayList<Integer> al = Arrays.stream(arr).boxed().collect(Collectors.toCollection(ArrayList::new));
         SubsetsI obj = new SubsetsI();
-        System.out.println(obj.method1(nums));
-        System.out.println(obj.subsetSums(nums));
+        System.out.println(obj.method1(arr));
+        System.out.println(obj.subsetSums(al, al.size()));
     }
 }

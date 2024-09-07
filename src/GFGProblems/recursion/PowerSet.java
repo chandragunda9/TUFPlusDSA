@@ -12,7 +12,7 @@ public class PowerSet {
         //Time: O(2^N)
 //      Space:  O(N * 2^N): We generate 2^n subsets, and each subset can have up to n elements.
 //        Additionally, the recursion stack can go up to a depth of n.
-        return ans;
+        return ans.subList(0, ans.size() - 1);
     }
 
     public void generate(int ind, String curr, String str, List<String> ans) {
@@ -24,5 +24,11 @@ public class PowerSet {
         generate(ind + 1, curr + str.charAt(ind), str, ans);
         //not take case
         generate(ind + 1, curr, str, ans);
+    }
+
+    public static void main(String[] args) {
+        PowerSet obj = new PowerSet();
+        String s = "abc";
+        System.out.println(obj.AllPossibleStrings(s));
     }
 }
