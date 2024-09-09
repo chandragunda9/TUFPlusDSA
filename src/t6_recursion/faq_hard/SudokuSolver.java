@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SudokuSolver {
     public void solveSudoku(char[][] board) {
-        solve(board);
+        solve(0, board);
     }
 
     boolean isPossible(char[][] grid, int row, int col, char digit) {
@@ -24,14 +24,14 @@ public class SudokuSolver {
         return true;
     }
 
-    boolean solve(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
+    boolean solve(int row, char[][] board) {
+        for (int i = row; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == '.') {
                     for (char digit = '1'; digit <= '9'; digit++) {
                         if (isPossible(board, i, j, digit)) {
                             board[i][j] = digit;
-                            if (solve(board)) return true;
+                            if (solve(i, board)) return true;
                             board[i][j] = '.';
                         }
                     }
@@ -59,7 +59,7 @@ public class SudokuSolver {
     }
 
     public void solveSudoku(int[][] sudoku) {
-        solveTheSudoku(sudoku);
+        solveTheSudoku(0, sudoku);
     }
 
     boolean isAllConditionsMet(int row, int col, int[][] sudoku, int digit) {
@@ -77,14 +77,14 @@ public class SudokuSolver {
         return true;
     }
 
-    boolean solveTheSudoku(int[][] sudoku) {
-        for (int row = 0; row < sudoku.length; row++) {
+    boolean solveTheSudoku(int start, int[][] sudoku) {
+        for (int row = start; row < sudoku.length; row++) {
             for (int col = 0; col < sudoku[0].length; col++) {
                 if (sudoku[row][col] == 0) {
                     for (int i = 1; i <= 9; i++) {
                         if (isAllConditionsMet(row, col, sudoku, i)) {
                             sudoku[row][col] = i;
-                            if (solveTheSudoku(sudoku)) return true;
+                            if (solveTheSudoku(row, sudoku)) return true;
                             sudoku[row][col] = 0;
                         }
                     }
