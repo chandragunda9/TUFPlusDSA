@@ -1,6 +1,6 @@
-package GFGProblems;
+package GFGProblems.binarysearch;
 
-public class binarysearch {
+public class SingleElementInSortedArray {
     public static int search(int n, int arr[]) {
         if (n == 1)
             return arr[0];
