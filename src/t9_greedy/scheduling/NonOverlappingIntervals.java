@@ -1,6 +1,7 @@
 package t9_greedy.scheduling;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class NonOverlappingIntervals {
@@ -8,7 +9,7 @@ public class NonOverlappingIntervals {
         int n = Intervals.length;
         Arrays.sort(Intervals, Comparator.comparingInt(a -> a[1]));
         int count = 1, last = Intervals[0][1];
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             int startTime = Intervals[i][0];
             int endTime = Intervals[i][1];
             if (startTime >= last) {
@@ -16,45 +17,40 @@ public class NonOverlappingIntervals {
                 last = endTime;
             }
         }
-        //Maximum no.of intervals can be array without overlapping
+        //Maximum no.of intervals can be in array without overlapping
         System.out.println(count);
         //remaining intervals(i.e removed intervals)
         return n - count;
     }
 
-    // Function to count the maximum number of non-overlapping intervals
-    public static int method2(int[][] intervals) {
-        // Sort the intervals based on their ending times
-        Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
+    int method2(int[][] Intervals) {
+        int size = Intervals.length, rem = 0;
+        if (size <= 1)
+            return 0;
 
-        // Get total number of intervals
-        int n = intervals.length;
+        // Sort by minimum starting point
+        Arrays.sort(Intervals, Comparator.comparingInt(o -> o[0]));
 
-        // Initialize counter
-        int cnt = 1;
-
-        // Keep track of the ending time
-        int lastEndTime = intervals[0][1];
-
-        // Iterate through all intervals
-        for (int i = 1; i < n; i++) {
-            /* Check if the starting time of the current
-            interval is greater than or equal to
-            the ending time of the last
-            selected interval */
-            if (intervals[i][0] >= lastEndTime) {
-                // Increment counter
-                cnt++;
-                // Update the ending time
-                lastEndTime = intervals[i][1];
-            }
+        int end = Intervals[0][1];
+        for (int i = 1; i < Intervals.length; i++) {
+            // If the current starting point is less than
+            // the previous interval's ending point
+            // (ie. there is an overlap)
+            if (Intervals[i][0] < end) {
+                // increase rem
+                rem++;
+                // Remove the interval
+                // with the higher ending point
+                end = Math.min(Intervals[i][1], end);
+            } else
+                end = Intervals[i][1];
         }
-        return n - cnt;
+
+        return rem;
     }
 
     public static void main(String[] args) {
         int[][] intervals = {{1, 10}, {1, 4}, {3, 8}, {3, 4}, {4, 5}};
         System.out.println(MaximumNonOverlappingIntervals(intervals));
-        System.out.println(method2(intervals));
     }
 }
