@@ -1,12 +1,17 @@
 package t9_greedy.scheduling;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class NonOverlappingIntervals {
     public static int MaximumNonOverlappingIntervals(int[][] Intervals) {
+        if (Intervals == null || Intervals.length == 0)
+            return 0;
         int n = Intervals.length;
+        for (int i = 0; i < n; i++) {
+            if (Intervals[i] == null || Intervals[i].length != 2)
+                return 0;
+        }
         Arrays.sort(Intervals, Comparator.comparingInt(a -> a[1]));
         int count = 1, last = Intervals[0][1];
         for (int i = 1; i < n; i++) {
@@ -21,32 +26,6 @@ public class NonOverlappingIntervals {
         System.out.println(count);
         //remaining intervals(i.e removed intervals)
         return n - count;
-    }
-
-    int method2(int[][] Intervals) {
-        int size = Intervals.length, rem = 0;
-        if (size <= 1)
-            return 0;
-
-        // Sort by minimum starting point
-        Arrays.sort(Intervals, Comparator.comparingInt(o -> o[0]));
-
-        int end = Intervals[0][1];
-        for (int i = 1; i < Intervals.length; i++) {
-            // If the current starting point is less than
-            // the previous interval's ending point
-            // (ie. there is an overlap)
-            if (Intervals[i][0] < end) {
-                // increase rem
-                rem++;
-                // Remove the interval
-                // with the higher ending point
-                end = Math.min(Intervals[i][1], end);
-            } else
-                end = Intervals[i][1];
-        }
-
-        return rem;
     }
 
     public static void main(String[] args) {
