@@ -1,5 +1,7 @@
 package t3_arrays.hard;
 
+import java.util.Arrays;
+
 public class RepeatingAndMissingNumber {
     public int[] findMissingRepeatingNumbers(int[] nums) {
         int xor = 0, n = nums.length;
@@ -41,5 +43,44 @@ public class RepeatingAndMissingNumber {
                 count++;
         }
         return count >= 2 ? new int[]{zero, ones} : new int[]{ones, zero};
+    }
+
+    static int[] findTwoElement(int arr[]) {
+        int xor = 0;
+        for (int i = 0; i < arr.length; i++) {
+            xor ^= arr[i];
+        }
+        for (int i = 1; i <= arr.length; i++) {
+            xor ^= i;
+        }
+
+        int num = (xor & (xor - 1)) ^ xor;
+        int ones = 0, zeroes = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if ((arr[i] & num) != 0) {
+                ones ^= arr[i];
+            } else {
+                zeroes ^= arr[i];
+            }
+        }
+        for (int i = 1; i <= arr.length; i++) {
+            if ((i & num) != 0) {
+                ones ^= i;
+            } else {
+                zeroes ^= i;
+            }
+        }
+
+        int count = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == zeroes)
+                count++;
+        }
+        return count >= 2 ? new int[]{zeroes, ones} : new int[]{ones, zeroes};
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 2};
+        System.out.println(Arrays.toString(findTwoElement(arr)));
     }
 }
