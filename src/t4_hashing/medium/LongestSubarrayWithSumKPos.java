@@ -1,8 +1,5 @@
 package t4_hashing.medium;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LongestSubarrayWithSumKPos {
     public static void main(String[] args) {
         int[] nums = {2};
