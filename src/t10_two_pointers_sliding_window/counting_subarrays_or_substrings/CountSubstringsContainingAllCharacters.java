@@ -36,7 +36,7 @@ public class CountSubstringsContainingAllCharacters {
     }
 
     public static void main(String[] args) {
-        String st = "abccba";
+        String st = "abcabc";
 //        String st = "abcba";
         System.out.println(numberOfSubstrings(st));
         System.out.println(method1(st));
