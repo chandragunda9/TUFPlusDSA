@@ -3,7 +3,7 @@ package t9_greedy.scheduling;
 import java.util.*;
 
 public class InsertInterval {
-    public static int[][] insertNewInterval(int[][] Intervals, int[] newInterval) {
+    public static int[][] method1(int[][] Intervals, int[] newInterval) {
         List<int[]> ans = new ArrayList<>();
 
         List<int[]> changedIntervals = new ArrayList<>(Arrays.asList(Intervals));
@@ -24,6 +24,29 @@ public class InsertInterval {
                 ans.add(new int[]{startTime, endTime});
                 lastEndTime = endTime;
             }
+        }
+        return ans.toArray(int[][]::new);
+    }
+
+    //better way of implementing
+    static int[][] insertNewInterval(int[][] intervals, int[] newInterval) {
+        int n = intervals.length;
+        List<int[]> ans = new ArrayList<>();
+        int i = 0;
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            ans.add(intervals[i]);
+            i++;
+        }
+
+        while (i < n && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        ans.add(newInterval);
+        while (i < n) {
+            ans.add(intervals[i]);
+            i++;
         }
         return ans.toArray(int[][]::new);
     }
