@@ -7,15 +7,14 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class KosarajusAlgorithm {
-//    public static void main(String[] args) {
-//        int[][] edges = {{0, 1}, {1, 2}, {2, 0}, {2, 3}, {3, 4}, {4, 5}, {4, 7}, {5, 6}, {6, 4}, {6, 7}};
-////        int[][] edges = {{0, 2}, {1, 0}, {2, 1}, {0, 3}, {3, 4}};
-//        int v = 5;
-//        ArrayList<ArrayList<Integer>> edg = Arrays.stream(edges).map(a -> Arrays.stream(a).boxed().collect(Collectors.toCollection(ArrayList::new)))
-//                .collect(Collectors.toCollection(ArrayList::new));
-//        KosarajusAlgorithm obj = new KosarajusAlgorithm();
-//        System.out.println(obj.kosaraju(v, edg));
-//    }
+    public static void main(String[] args) {
+        int[][] arr = {{2, 3}, {0}, {1}, {4}, {}};
+        int v = 5;
+        ArrayList<ArrayList<Integer>> adj = Arrays.stream(arr).map(a -> Arrays.stream(a).boxed().collect(Collectors.toCollection(ArrayList::new)))
+                .collect(Collectors.toCollection(ArrayList::new));
+        KosarajusAlgorithm obj = new KosarajusAlgorithm();
+        System.out.println(obj.kosaraju(v, adj));
+    }
 
     public int kosaraju(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean[] vis = new boolean[V];
@@ -36,17 +35,6 @@ public class KosarajusAlgorithm {
             }
         }
         return noOfStronglyConnectedComponents;
-    }
-
-    private List<List<Integer>> buildAdjacencyList(int V, ArrayList<ArrayList<Integer>> edges) {
-        List<List<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < V; i++) {
-            adj.add(new ArrayList<>());
-        }
-        for (ArrayList<Integer> edge : edges) {
-            adj.get(edge.get(0)).add(edge.get(1));
-        }
-        return adj;
     }
 
     List<List<Integer>> reverseGraph(int V, ArrayList<ArrayList<Integer>> adj, boolean[] vis) {
