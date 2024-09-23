@@ -26,4 +26,23 @@ public class RowWithMaximumOnes {
         }
         return maxInd;
     }
+
+    public int method2(int[][] mat) {
+        int n = mat.length, m = mat[0].length, i = 0, j = m - 1;
+        int maxOnes = 0, maxInd = -1;
+        while (i < n && j >= 0) {
+            if (mat[i][j] == 1) {
+                if (m - j > maxOnes) {
+                    maxOnes = m - j;
+                    maxInd = i;
+                }
+            }
+            if (j > 0 && mat[i][j - 1] == 1) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return maxInd;
+    }
 }

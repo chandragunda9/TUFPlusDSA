@@ -107,36 +107,4 @@ public class MinimiseMaxDistToGasStations {
         int k = 2;
         System.out.println(obj.minimiseMaxDistance(arr, k));
     }
-
-    public static double findSmallestMaxDist(int arr[], int k) {
-        int maxDiff = 0;
-        double mod = 1e-6;
-        for (int i = 0; i < arr.length - 1; i++) {
-            maxDiff = Math.max(maxDiff, arr[i + 1] - arr[i]);
-        }
-        double low = 0, high = maxDiff;
-        while (high - low >= mod) {
-            double mid = (low + high) / 2;
-            int count = f(arr, mid);
-            if (count <= k) {
-                high = mid;
-            } else {
-                low = mid;
-            }
-        }
-        return high;
-    }
-
-    static int f(int[] arr, double mid) {
-        int count = 0;
-        for (int i = 0; i < arr.length - 1; i++) {
-            int diff = arr[i + 1] - arr[i];
-            int noOfStationsInBetween = (int) (diff / mid);
-            if (noOfStationsInBetween * mid == diff) {
-                noOfStationsInBetween--;
-            }
-            count += noOfStationsInBetween;
-        }
-        return count;
-    }
 }
