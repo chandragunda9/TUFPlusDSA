@@ -13,7 +13,7 @@ public class ConnectedComponents {
             sizes = new int[n + 1];
             for (int i = 0; i < parent.length; i++) {
                 parent[i] = i;
-                sizes[i] = i;
+                sizes[i] = 1;
             }
         }
 
