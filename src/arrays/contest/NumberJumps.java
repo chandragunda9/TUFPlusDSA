@@ -1,9 +1,9 @@
 package arrays.contest;
 
+
 public class NumberJumps {
     public int NumberOfJumps(int[] nums, int k) {
         return mergeSort(nums, 0, nums.length - 1, k);
-
     }
 
     void merge(int[] nums, int low, int mid, int high) {
@@ -41,11 +41,9 @@ public class NumberJumps {
             //count logic
             int j = mid + 1;
             for (int i = low; i <= mid; i++) {
-
-                while (j <= high && nums[j] <= nums[i] + k) {
+                while (j <= high && nums[i] + k >= nums[j]) {
                     j++;
                 }
-
                 count += (high - j + 1);
             }
 

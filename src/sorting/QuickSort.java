@@ -6,34 +6,32 @@ public class QuickSort {
         return nums;
     }
 
-    int findPivotElement(int[] nums, int low, int high) {
-        int i = low, j = high;
-        while (i < j) {
-            while (i <= high && nums[i] <= nums[low]) {
-                i++;
+    int findPartition(int[] nums, int low, int high) {
+        int left = low, right = high;
+        while (left < right) {
+            while (left <= high && nums[left] <= nums[low]) {
+                left++;
             }
-            while (j >= low && nums[j] > nums[low]) {
-                j--;
+            while (right >= low && nums[right] > nums[low]) {
+                right--;
             }
-            if (i < j) {
-                swap(nums, i, j);
+            if (left < right) {
+                int temp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = temp;
             }
         }
-        swap(nums, low, j);
-        return j;
-    }
-
-    void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+        int temp = nums[right];
+        nums[right] = nums[low];
+        nums[low] = temp;
+        return right;
     }
 
     void sort(int[] nums, int low, int high) {
         if (low < high) {
-            int partitionIndex = findPivotElement(nums, low, high);
-            sort(nums, low, partitionIndex - 1);
-            sort(nums, partitionIndex + 1, high);
+            int partitionInd = findPartition(nums, low, high);
+            sort(nums, low, partitionInd - 1);
+            sort(nums, partitionInd + 1, high);
         }
     }
 }

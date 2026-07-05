@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MaximumConsecutiveOnes {
     public int findMaxConsecutiveOnes1(int[] nums) {
         AtomicInteger atomicInteger = new AtomicInteger(0);
-        return Arrays.stream(nums).map(n -> n == 1 ? atomicInteger.incrementAndGet() : atomicInteger.getAndSet(0))
+        return Arrays.stream(nums).map(num -> num == 1 ? atomicInteger.incrementAndGet() : atomicInteger.getAndSet(0))
                 .max().getAsInt();
     }
 

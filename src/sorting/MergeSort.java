@@ -11,30 +11,26 @@ public class MergeSort {
 
     void merge(int[] nums, int low, int mid, int high) {
         List<Integer> temp = new ArrayList<>();
-        int left = low;
-        int right = mid + 1;
-        while (left <= mid && right <= high) {
-            if (nums[left] <= nums[right]) {
-                temp.add(nums[left]);
-                left++;
+        int i = low, j = mid + 1;
+        while (i <= mid && j <= high) {
+            if (nums[i] < nums[j]) {
+                temp.add(nums[i]);
+                i++;
             } else {
-                temp.add(nums[right]);
-                right++;
+                temp.add(nums[j]);
+                j++;
             }
         }
-
-        while (left <= mid) {
-            temp.add(nums[left]);
-            left++;
+        while (i <= mid) {
+            temp.add(nums[i]);
+            i++;
         }
-
-        while (right <= high) {
-            temp.add(nums[right]);
-            right++;
+        while (j <= high) {
+            temp.add(nums[j]);
+            j++;
         }
-
-        for (int i = low; i <= high; i++) {
-            nums[i] = temp.get(i - low);
+        for (int k = low; k <= high; k++) {
+            nums[k] = temp.get(k - low);
         }
     }
 
