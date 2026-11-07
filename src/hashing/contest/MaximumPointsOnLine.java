@@ -1,4 +1,4 @@
-package hashing_practice.contest;
+package hashing.contest;
 
 import java.util.HashMap;
 import java.util.Map;
